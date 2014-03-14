@@ -1,0 +1,1 @@
+# cortex-search [![NPM version](https://badge.fury.io/js/cortex-search.png)](http://badge.fury.io/js/cortex-search) [![Build Status](https://travis-ci.org/cortexjs/cortex-search.png?branch=master)](https://travis-ci.org/cortexjs/cortex-search) [![Dependency Status](https://gemnasium.com/cortexjs/cortex-search.png)](https://gemnasium.com/cortexjs/cortex-search)
