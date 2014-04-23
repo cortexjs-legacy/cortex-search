@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Cortex plugin to search a package from registry by keywords or name.",
   "main": "index.js",
+  "bin": {
+    "cortex-search": "./bin/cli.js"
+  },
   "scripts": {
     "test": "make test"
   },
@@ -13,7 +16,7 @@
   "keywords": [
     "checker"
   ],
-  "engines": { 
+  "engines": {
     "node": ">=0.8.0"
   },
   "author": "kael",
@@ -24,5 +27,11 @@
   "devDependencies": {
     "mocha": "~1.13.0",
     "chai": "~1.8.0"
+  },
+  "dependencies": {
+    "cortex-search-utils": "0.0.4",
+    "optimist": "^0.6.1",
+    "columnify": "^0.1.2",
+    "bash-color": "0.0.3"
   }
 }
