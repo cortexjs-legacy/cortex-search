@@ -29,9 +29,11 @@
     "chai": "~1.8.0"
   },
   "dependencies": {
-    "cortex-search-utils": "0.0.4",
+    "cortex-search-utils": "~0.0.6",
     "optimist": "^0.6.1",
     "columnify": "^0.1.2",
-    "bash-color": "0.0.3"
+    "colors": "^0.6.2",
+    "modified": "^2.1.13",
+    "cortex-profile": "^1.0.0"
   }
 }

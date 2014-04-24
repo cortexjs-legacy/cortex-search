@@ -1,8 +1,44 @@
 'use strict';
 
-var search = require('cortex-search-utils')('http://couch.cortex.dp');
-var color = require('bash-color');
+var url = require('url');
+var color = require('colors');
 var columnify = require('columnify');
+var modified = require('modified');
+var node_path = require('path');
+var crypto = require('crypto');
+
+var profile = require('cortex-profile')().init();
+
+var homeDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+
+var request = modified({
+    cacheMapper: function(options, callback) {
+        var method = options.method.toLowerCase();
+        var p = url.parse(options.url);
+        var search = p.search;
+        var path = p.pathname;
+        if (path) {
+            var filename = '';
+            if (search || (method != 'get')) {
+                var md5 = crypto.createHash('md5');
+                md5.update(search);
+                md5.update(method);
+                filename = md5.digest('hex');
+            }
+
+            callback(
+                null,
+                node_path.join(homeDir, '.cache/cortex/search', path, filename) + '.cache'
+            );
+        } else {
+            callback(null, null);
+        }
+    }
+});
+
+var search = require('cortex-search-utils')(profile.get('registry').replace(/\/$/, '') + ':' + profile.get('registry_port'), {
+    request: request
+});
 
 module.exports = function(args, options, cb) {
     args = args || [];
