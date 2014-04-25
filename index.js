@@ -103,8 +103,13 @@ module.exports = function(args, options, cb) {
             }
         });
 
+
         if (width != Infinity)
             out = out.split('\n').map(function(line) {
+                if (line.wcwidth > width) {
+                    line = line.slice(0, width - line.wcwidth);
+                }
+
                 return line.slice(0, width);
             }).join('\n');
 

@@ -31,9 +31,10 @@
   "dependencies": {
     "cortex-search-utils": "~0.0.6",
     "optimist": "^0.6.1",
-    "columnify": "^0.1.2",
+    "columnify": "~0.1.2",
     "colors": "^0.6.2",
     "modified": "^2.1.13",
-    "cortex-profile": "^1.0.0"
+    "cortex-profile": "^1.0.0",
+    "wcwidth.js": "0.0.3"
   }
 }
