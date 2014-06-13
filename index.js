@@ -36,7 +36,14 @@ var request = modified({
     }
 });
 
-var search = require('cortex-search-utils')(profile.get('registry').replace(/\/$/, '') + ':' + profile.get('registry_port'), {
+
+var registry_url = profile.get('registry').replace(/\/$/, '');
+
+if(!/:[0-9]+$/.test(registry_url)) {
+    registry_url = registry_url + profile.get('registry_port');
+}
+
+var search = require('cortex-search-utils')(registry_url,  {
     request: request
 });
 
@@ -113,13 +120,18 @@ module.exports = function(args, options, cb) {
                 return line.slice(0, width);
             }).join('\n');
 
+        var lines = out.split('\n');
+        var header = lines[0];
+        lines.splice(0, 1);
+        var rems = lines.join('\n');
+
         args.forEach(function(arg) {
-            out = out.replace(new RegExp(arg, "gi"), function(bit) {
+            rems = rems.replace(new RegExp(arg, "gi"), function(bit) {
                 return color.red(arg);
             });
         });
 
-        cb(null, out);
+        cb(null, [header, rems].join('\n'));
     });
 };
 
